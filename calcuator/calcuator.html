@@ -4,6 +4,7 @@
 <head>
   <title>Калькулятор</title>
   <link rel="stylesheet" href="style.css"> 
+  <script type="text/javascript" src="script.js"></script> 
 </head>
 
 <body>
@@ -15,9 +16,25 @@
       0
     </div>
 
+
+
     <div>
+      <div>
+        <button id="btn_op_theme" class="my-btn with-text">Theme</button>
+        <button id="btn_op_color" class="my-btn with-text">Color</button>
+        <button id="btn_op_special" class="my-btn with-text">Special</button>
+      </div>
+
+      <div>
+        <button id="btn_op_factorial" class="my-btn">!</button>
+        <button id="btn_op_sqrt" class="my-btn">√</button>
+        <button id="btn_op_sqr" class="my-btn">^2</button>
+        <button id="btn_op_backspace" class="my-btn primary">←</button>
+      </div>
+      
       <div>  
-        <button id="btn_op_clear" class="my-btn">C</button>   
+
+        <button id="btn_op_clear" class="my-btn">C</button>    
         <button id="btn_op_sign" class="my-btn">+/-</button>
         <button id="btn_op_percent" class="my-btn">%</button>
         <button id="btn_op_div" class="my-btn primary">/</button>
@@ -49,11 +66,14 @@
         <button id="btn_digit_dot" class="my-btn">.</button>
         <button id="btn_op_equal" class="my-btn primary execute">=</button>
       </div>
-      
+
+      <div>
+        <button id="btn_digit_000" class="my-btn">000</button>
+      </div>
     </div>
   </div>
   
-  <footer id>
+  <footer id = "footer">
     <a href="https://github.com/vdjados" class="github-button" target="_blank">GitHub</a>
 
     <div class="author">
