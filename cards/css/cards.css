@@ -1,125 +1,105 @@
-.card-custom {
+/* ====================
+   Header styling
+   ==================== */
+   header {
+    text-align: center;
+    background-color: #f8f9fa;
+    padding: 1rem 0;
+    border-bottom: 2px solid #ef3124;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  header .h3 a {
+    color: #030306;
+    text-decoration: none;
+    font-size: 1.75rem;
+    font-weight: 600;
+  }
+  header .h3 a:hover {
+    color: #ef3124;
+  }
+  
+  /* ==========================================
+     Center Add/Delete buttons side by side
+     ========================================== */
+  .d-flex.justify-content-around.mt-3 {
+    display: flex !important;
+    justify-content: center !important;
+    gap: 20px;
+  }
+  
+  /* ====================
+     Card styles
+     ==================== */
+  .card-custom {
     background-color: #fff !important;
-    border: 0px solid #ffffff !important;
+    border: 0 !important;
     color: #ffffff !important;
     width: 300px;
     margin: 15px;
   }
-  
-  
   .card-custom .card-img-overlay {
     padding: 30px;
-    margin-top:  50%;
+    margin-top: 50%;
   }
-  
   .card-custom .card-title {
     font-size: 22px;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Ubuntu, Cantarell, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Ubuntu, Cantarell, Arial, sans-serif;
     color: #030306e0;
-    margin-top: 0px;
-    margin-bottom: 2px;
-}
-  
+    margin: 0 0 2px 0;
+  }
   .card-custom .card-text {
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica, Ubuntu, Cantarell, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Ubuntu, Cantarell, Arial, sans-serif;
     color: #030306e0;
     font-size: 16px;
     font-weight: 400;
     white-space: pre-wrap;
   }
-  
   .card-custom .btn-custom {
     background-color: #ef3124 !important;
     color: #fff !important;
     border-radius: 8px;
     padding: 8px 12px;
     display: block;
-    width: fit-content; 
+    width: fit-content;
     margin: 0 auto;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Helvetica, sans-serif;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica Neue, Helvetica, sans-serif;
     font-size: 16px;
   }
-  
   .card-custom .btn-custom:hover {
     background-color: #ffffff !important;
     color: #000000 !important;
   }
-
-
-
-.carousel {
-    margin: 0 auto;
-}
-
-.carousel-control-prev {
-    left: -100px;
-}
-.carousel-control-next {
-    right: -70px;
-}
-
-
-.carousel-control-prev,
-.carousel-control-next {
-    width: 40px; 
-    height: 40px;
-    background-color: rgba(15, 25, 55, .1); 
-    border-radius: 24px; 
-    opacity: 1; 
-    top: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-    background-size: 60%; 
-    width: 20px;
-    height: 20px;
-    
-}
-
-.carousel-control-prev-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23030306' viewBox='0 0 16 16'%3e%3cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/svg%3e");
-    opacity: 0.878; 
-}
-
-.carousel-control-next-icon {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='%23030306' viewBox='0 0 16 16'%3e%3cpath d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e");
-    opacity: 0.878; 
-}
-
-.add-card-button {
-    background-color: rgba(15, 25, 55, .1) !important;
-
+  
+  /* ====================
+     Add/Delete button styles
+     ==================== */
+  .add-card-button,
+  .delete-card-button {
+    background-color: rgba(15, 25, 55, 0.1) !important;
     color: #030306e0 !important;
     border-radius: 8px;
-    border: 0px;
+    border: 0;
     padding: 8px 15px;
     display: block;
     width: fit-content;
     margin: 0 auto;
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Helvetica, sans-serif;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica Neue, Helvetica, sans-serif;
     font-size: 16px;
-    position: absolute;
-    right: 695px;
-    top: 350px;
-}
-
-.delete-card-button {
-    background-color: rgba(15, 25, 55, .1) !important;
-
-    color: #030306e0 !important;
-    border-radius: 8px;
-    border: 0px;
-    padding: 8px 15px;
-    display: block; 
-    width: fit-content;
-    margin: 0 auto; 
-    font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 16px;
-    position: absolute;
-    right: 700px;
-    top: 400px;
-}
+  }
+  
+  /* ====================
+     My-inner layout
+     ==================== */
+  .my-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    gap: 15px;
+  }
+  .my-item {
+    flex: 0 0 calc(33.333% - 30px);
+    max-width: calc(33.333% - 30px);
+    box-sizing: border-box;
+  }
+  

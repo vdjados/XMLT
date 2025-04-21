@@ -5,7 +5,7 @@ export class ProductCardComponent {
 
     getHTML(data) {
         let result_html = `
-            <div class="card card-custom" style="width: 300px;">
+            <div class="card card-custom">
             
                 <img class="card-img-top" src="${data.src}" alt="картинка">
                 <div class="card-img-overlay" >
@@ -17,9 +17,9 @@ export class ProductCardComponent {
         `
         
         if (data.id == 1) {
-            result_html = `<div class="carousel-item active">${result_html}</div>`
+            result_html = `<div class="my-item active">${result_html}</div>`
         } else {
-            result_html = `<div class="carousel-item">${result_html}</div>`
+            result_html = `<div class="my-item">${result_html}</div>`
         }
         
         return result_html

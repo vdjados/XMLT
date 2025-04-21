@@ -32,6 +32,11 @@ export class ProductPage {
     getHTML() {
         return (
             `
+                <header class="py-3 mb-4 border-bottom">
+                    <h1 class="h3">
+                        <a href="#" class="text-decoration-none text-dark" id="home-link">Домой</a>
+                    </h1>
+                </header>
                 <div id="product-page"></div>
             `
         )
@@ -41,6 +46,8 @@ export class ProductPage {
         const mainPage = new MainPage(this.parent)
         mainPage.render()
     }
+
+    
 
     render() {
         this.parent.innerHTML = ''
@@ -54,5 +61,10 @@ export class ProductPage {
 
         const backButton = new BackButtonComponent(this.pageRoot)
         backButton.render(this.clickBack.bind(this))
+
+        document.getElementById('home-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            this.clickBack();
+        });
     }
 }
