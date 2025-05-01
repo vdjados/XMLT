@@ -112,10 +112,10 @@ export class MainPage {
     bindStaticListeners() {
         const container = document.querySelector('.static-cards');
         const templates = [
-            { id: 1, title: '1. Количество повторов', placeholder: 'Например: 1,2,2,3,3,3', handler: () => this.countIdentic },
-            { id: 2, title: '2. Среднее арифм.', placeholder: 'Например: 1,2,3,4', handler: () => this.average },
-            { id: 3, title: '3. Диапазоны', placeholder: 'Например: 1,2,3,5,6,7', handler: () => this.rangeString },
-            { id: 4, title: '4. Анаграммы', placeholder: 'Например: eat,tea,ate,bat,tab', handler: () => this.anagram }
+            { id: 1, title: '1. Количество заявок на одинаковые суммы кредита (в млн. рублей)', placeholder: 'Например: 1,2,2,3,3,3', handler: () => this.countIdentic },
+            { id: 2, title: '2. Средняя сумма запрашиваемых кредитов (в млн. рублей)', placeholder: 'Например: 1,2,3,4', handler: () => this.average },
+            { id: 3, title: '3. Группировка кредитных запросов по диапазонам', placeholder: 'Например: 1,2,3,5,6,7', handler: () => this.rangeString },
+            { id: 4, title: '4. Проверка похожих имён клиентов, оформивших кредит', placeholder: 'Например: Иван,Ваня,Нива,Найв', handler: () => this.anagram }
         ];
         templates.forEach(t => {
             const cardWrapper = document.createElement('div');
