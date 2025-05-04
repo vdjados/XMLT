@@ -1,0 +1,28 @@
+# Node.js
+node_modules/
+dist/
+npm-debug.log
+yarn-error.log
+package-lock.json
+yarn.lock
+
+# TypeScript
+*.tsbuildinfo
+
+# Logs
+*.log
+
+# IDEs and Editors
+.idea/
+.vscode/
+*.sublime-workspace
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+coverage/
+
+# NestJS build outputs
+*.env
