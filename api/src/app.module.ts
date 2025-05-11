@@ -1,12 +1,12 @@
 // src/app.module.ts
 import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
-import { StocksModule } from './stocks/stocks.module';
+import { CreditsModule } from './credits/credits.module';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
 
 @Module({
   imports: [
-    StocksModule,
+    CreditsModule,
   ],
   providers: [
     {
