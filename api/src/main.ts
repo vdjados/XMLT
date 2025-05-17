@@ -2,19 +2,14 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule }   from './app.module';
 import { ValidationPipe }     from '@nestjs/common';
 import { AllExceptionsFilter } from './common/filters/all-exceptions.filter';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { resolve } from 'path';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true,
-    transform: true,
-    forbidNonWhitelisted: true,
-    validationError: { target: false },
-  }));
+  app.useStaticAssets(resolve(__dirname, '..', 'public'));
 
-  app.useGlobalFilters(new AllExceptionsFilter());
-
-  await app.listen(3000);
+  await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();
