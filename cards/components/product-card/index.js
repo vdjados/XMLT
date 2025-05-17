@@ -9,8 +9,8 @@ export class ProductCardComponent {
             
                 <img class="card-img-top" src="${data.src}" alt="картинка">
                 <div class="card-img-overlay" >
-                    <h5 class="card-title">${data.title}</h5>
-                    <p class="card-text">${data.text}</p>
+                    <h5 class="card-title">${data.creditTitle}</h5>
+                    <p class="card-text">${data.creditText}</p>
                     <button class="btn btn-custom" id="click-card-${data.id}" data-id="${data.id}">Подробнее</button>
                 </div>
             </div>

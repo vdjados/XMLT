@@ -1,6 +1,8 @@
 import {BackButtonComponent} from "../../components/back-button/index.js";
 import {MainPage} from "../main/index.js";
 import {ProductComponent} from "../../components/product/index.js";
+import { ajax } from "../../modules/ajax.js";
+import {creditUrls} from "../../modules/creditUrls.js";
 export class ProductPage {
     constructor(parent, id) {
         this.parent = parent
@@ -16,13 +18,10 @@ export class ProductPage {
         
     }
 
-    getData() {
-        return {
-            id: 1,
-            src: "https://alfabank.servicecdn.ru/site-upload/c4/9f/1449/D_PureCard_364x364_200125.png",
-            title: `Поздравляем!`,
-            text: `Теперь Вы можете взять кредит на сумму ${this.calcuateCredit(this.id)} млн. рублей`
-        }
+     getData() {
+        ajax.get(creditUrls.getCreditById(this.id), (data) => {
+            this.renderData(data);
+        })
     }
 
     get pageRoot() {
@@ -47,9 +46,12 @@ export class ProductPage {
         mainPage.render()
     }
 
-    
+    renderData(item) {
+        const product = new ProductComponent(this.pageRoot)
+        product.render(item)
+    }
 
-    render() {
+    /*render() {
         this.parent.innerHTML = ''
         const html = this.getHTML()
         this.parent.insertAdjacentHTML('beforeend', html)
@@ -66,5 +68,16 @@ export class ProductPage {
             e.preventDefault();
             this.clickBack();
         });
+    }*/
+
+    render() {
+        this.parent.innerHTML = ''
+        const html = this.getHTML()
+        this.parent.insertAdjacentHTML('beforeend', html)
+
+        const backButton = new BackButtonComponent(this.pageRoot)
+        backButton.render(this.clickBack.bind(this))
+
+        this.getData()
     }
 }

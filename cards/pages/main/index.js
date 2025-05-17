@@ -8,17 +8,53 @@ import {creditUrls} from "../../modules/creditUrls.js";
 export class MainPage {
     constructor(parent) {
         this.parent = parent;
+        this.currentData = [];    
+        this.filteredData = [];  
+        this.limit = 5;        
+        this.filterText = '';
     }
 
     getData() {
-        ajax.get(creditUrls.getCredits(), (data) => {
-            this.renderData(data);
-        })
+        
+        const params = new URLSearchParams();
+            if (this.filterText) {
+                params.append('creditTitle', this.filterText);
+            }
+
+            ajax.get(`${creditUrls.getCredits()}?${params}`, (data) => {
+                this.currentData = data;
+                this.applyPagination(); 
+                this.renderCards(this.paginatedData);
+            });
     }
+
+    applyPagination() {
+        this.paginatedData = this.currentData.slice(0, this.limit);
+    }
+
 
     get pageRoot() {
         return document.getElementById('main-page');
     }
+
+    setupControls() {
+    // Фильтр (серверная часть)
+    let timeout;
+    document.getElementById('title-filter').addEventListener('input', (e) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
+            this.filterText = e.target.value.trim();
+            this.getData(); // Новый запрос к серверу при изменении фильтра
+        }, 500);
+    });
+
+    // Лимит (клиентская часть)
+    document.getElementById('pagination-limit').addEventListener('change', (e) => {
+        this.limit = Math.max(1, parseInt(e.target.value) || 5);
+        this.applyPagination(); // Применяем пагинацию без запроса к серверу
+        this.renderCards(this.paginatedData);
+    });
+}
 
     getHTML() {
         return `
@@ -30,13 +66,24 @@ export class MainPage {
 
             <div id="main-page" class="container">
 
-
-                <!-- my Section -->
-
-                <div class="d-flex justify-content-center mb-3">
-                    <input type="number" id="filter-input" placeholder="Макс. сумма в млн ₽" class="form-control me-2" style="max-width: 200px;">
-                    <button class="btn btn-custom" id="filter-btn">Фильтровать</button>
+                <div class="filter-controls mb-4">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <input type="text" 
+                               id="title-filter" 
+                               class="form-control" 
+                               placeholder="Фильтрация по названию">
+                    </div>
+                    <div class="col-md-3">
+                        <input type="number" 
+                               id="pagination-limit" 
+                               class="form-control" 
+                               value="5"
+                               min="1" 
+                               placeholder="Количество карточек">
+                    </div>
                 </div>
+            </div>
 
                 <div class="justify-content-center">
                     <div class="col-auto">
@@ -53,10 +100,6 @@ export class MainPage {
                     </div>
                 </div>
 
-                <!-- Static function cards below -->
-                <div class="d-flex justify-content-center static-cards" style="margin-top:6rem; gap:1rem; flex-wrap:nowrap; overflow-x:hidden;">
-                    <!-- Card templates populated in render() -->
-                </div>
             </div>
         `;
     }
@@ -140,11 +183,16 @@ export class MainPage {
         });
     }
 
+    
+
     renderData(items) {
+        const container = document.getElementById('my-inner');
+        container.innerHTML = '';
+        
         items.forEach((item) => {
-            const productCard = new ProductCardComponent(this.pageRoot)
-            productCard.render(item, this.clickCard.bind(this))
-        })
+            const productCard = new ProductCardComponent(container); 
+            productCard.render(item, this.clickCard.bind(this));
+        });
     }
 
     renderCards(items) {
@@ -161,37 +209,10 @@ export class MainPage {
 
     render() {
 
-        this.parent.innerHTML = ''
-    const html = this.getHTML()
-    this.parent.insertAdjacentHTML('beforeend', html)
-
-    this.getData()
-
-            
-
-            /*
-        this.parent.innerHTML = '';
-        this.parent.insertAdjacentHTML('beforeend', this.getHTML());
-
-        const myInner = document.getElementById('my-inner');
-        this.getData().forEach(item => {
-            new ProductCardComponent(myInner).render(item, this.clickCard.bind(this));
-        });
-        new AddCardButtonComponent(document.getElementById('add-button-container')).render(this.clickAdd.bind(this));
-        new DeleteCardButtonComponent(document.getElementById('delete-button-container')).render(this.clickDelete.bind(this));
-
+        this.parent.innerHTML = this.getHTML();
+        this.setupControls();       
+        this.getData();
         this.bindStaticListeners();
 
-        document.getElementById('filter-btn').addEventListener('click', () => {
-            const max = Number(document.getElementById('filter-input').value);
-            const filtered = this.getData().filter(item => {
-              const match = item.text.match(/до\s*([\d\s]+)\s*млн/);
-              if (!match) return false;
-              const amount = Number(match[1].replace(/\s/g, ''));
-              return amount <= max;
-            });
-            this.renderCards(filtered);
-          });*/
-  
     }
 }
