@@ -2,6 +2,8 @@ import {ProductPage} from "../product/index.js";
 import {ProductCardComponent} from "../../components/product-card/index.js";
 import {AddCardButtonComponent} from "../../components/add-card-button/index.js";
 import {DeleteCardButtonComponent} from "../../components/delete-card-button/index.js";
+import {ajax} from "../../modules/ajax.js";
+import {creditUrls} from "../../modules/creditUrls.js";
 
 export class MainPage {
     constructor(parent) {
@@ -9,11 +11,9 @@ export class MainPage {
     }
 
     getData() {
-        return [
-            { id: 1, src: "https://alfabank.servicecdn.ru/site-upload/4f/19/1449/D_CardPromo_364x364_170924_2.png", title: "Лучшие условия", text: "Кредит до 1 млн рублей!" },
-            { id: 2, src: "https://alfabank.servicecdn.ru/site-upload/dc/75/1449/D_CardPromo_364x364_260724.png", title: "Низкие проценты", text: "Кредит до 10 млн. рублей!" },
-            { id: 3, src: "https://alfabank.servicecdn.ru/site-upload/f3/f9/1449/D_CardPromo_364x364_280325.png", title: "Банк №1 в России", text: "Кредит до 100 млн. рублей!" }
-        ];
+        ajax.get(creditUrls.getCredits(), (data) => {
+            this.renderData(data);
+        })
     }
 
     get pageRoot() {
@@ -140,6 +140,13 @@ export class MainPage {
         });
     }
 
+    renderData(items) {
+        items.forEach((item) => {
+            const productCard = new ProductCardComponent(this.pageRoot)
+            productCard.render(item, this.clickCard.bind(this))
+        })
+    }
+
     renderCards(items) {
         const myInner = document.getElementById('my-inner');
         myInner.innerHTML = ''; 
@@ -153,6 +160,16 @@ export class MainPage {
     
 
     render() {
+
+        this.parent.innerHTML = ''
+    const html = this.getHTML()
+    this.parent.insertAdjacentHTML('beforeend', html)
+
+    this.getData()
+
+            
+
+            /*
         this.parent.innerHTML = '';
         this.parent.insertAdjacentHTML('beforeend', this.getHTML());
 
@@ -174,7 +191,7 @@ export class MainPage {
               return amount <= max;
             });
             this.renderCards(filtered);
-          });
+          });*/
   
     }
 }
