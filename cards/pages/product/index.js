@@ -18,10 +18,13 @@ export class ProductPage {
         
     }
 
-     getData() {
-        ajax.get(creditUrls.getCreditById(this.id), (data) => {
+    async getData() {
+        try {
+            const {data} = await ajax.get(creditUrls.getCreditById(this.id));
             this.renderData(data);
-        })
+        } catch (error) {
+            console.error('Ошибка загрузки данных продукта:', error);
+        }
     }
 
     get pageRoot() {
@@ -50,25 +53,6 @@ export class ProductPage {
         const product = new ProductComponent(this.pageRoot)
         product.render(item)
     }
-
-    /*render() {
-        this.parent.innerHTML = ''
-        const html = this.getHTML()
-        this.parent.insertAdjacentHTML('beforeend', html)
-
-
-        const data = this.getData()
-        const stock = new ProductComponent(this.pageRoot)
-        stock.render(data)
-
-        const backButton = new BackButtonComponent(this.pageRoot)
-        backButton.render(this.clickBack.bind(this))
-
-        document.getElementById('home-link').addEventListener('click', (e) => {
-            e.preventDefault();
-            this.clickBack();
-        });
-    }*/
 
     render() {
         this.parent.innerHTML = ''

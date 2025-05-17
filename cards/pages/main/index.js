@@ -16,18 +16,20 @@ export class MainPage {
         this.filterText = '';
     }
 
-    getData() {
-        
+    async getData() {
         const params = new URLSearchParams();
-            if (this.filterText) {
-                params.append('creditTitle', this.filterText);
-            }
+        if (this.filterText) {
+            params.append('creditTitle', this.filterText);
+        }
 
-            ajax.get(`${creditUrls.getCredits()}?${params}`, (data) => {
-                this.currentData = data;
-                this.applyPagination(); 
-                this.renderCards(this.paginatedData);
-            });
+        try {
+            const {data} = await ajax.get(`${creditUrls.getCredits()}?${params}`);
+            this.currentData = data;
+            this.applyPagination();
+            this.renderCards(this.paginatedData);
+        } catch (error) {
+            console.error('Ошибка загрузки данных:', error);
+        }
     }
 
     applyPagination() {
@@ -242,6 +244,10 @@ export class MainPage {
         }
 
         this.getData();
+<<<<<<< HEAD
         this.setupControls();
+=======
+
+>>>>>>> 6617543 (Finished lab6)
     }
 }
