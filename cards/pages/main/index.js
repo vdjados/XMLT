@@ -4,6 +4,8 @@ import {AddCardButtonComponent} from "../../components/add-card-button/index.js"
 import {DeleteCardButtonComponent} from "../../components/delete-card-button/index.js";
 import {ajax} from "../../modules/ajax.js";
 import {creditUrls} from "../../modules/creditUrls.js";
+import { AddCardPage } from "../add/index.js";
+import { EditCardPage } from "../edit/index.js";
 
 export class MainPage {
     constructor(parent) {
@@ -95,7 +97,6 @@ export class MainPage {
                         <!-- Add/Delete Buttons -->
                         <div class="d-flex justify-content-around mt-3">
                             <div id="add-button-container"></div>
-                            <div id="delete-button-container"></div>
                         </div>
                     </div>
                 </div>
@@ -111,10 +112,13 @@ export class MainPage {
     }
 
     clickAdd(e) {
-        const myInner = document.getElementById('my-inner');
+        const addPage = new AddCardPage(this.parent);
+        addPage.render();
+
+        /*const myInner = document.getElementById('my-inner');
         const newItem = { id: Date.now(), src: "https://alfabank.servicecdn.ru/site-upload/4f/19/1449/D_CardPromo_364x364_170924_2.png", title: "Лучшие условия", text: "Кредит до 1 млн рублей!" };
         const productCard = new ProductCardComponent(myInner);
-        productCard.render(newItem, this.clickCard.bind(this));
+        productCard.render(newItem, this.clickCard.bind(this));*/
     }
 
     clickDelete(e) {
@@ -183,6 +187,26 @@ export class MainPage {
         });
     }
 
+    clickEdit(id) {
+        
+        const product = this.currentData.find(item => item.id === id);
+        if (!product) return;
+
+        const addPage = new EditCardPage(this.parent, product);
+        addPage.render();
+    }
+
+    deleteCard(id) {
+        ajax.delete(`${creditUrls.getCredits()}/${id}`, (response) => {
+            // Успешно удалили на сервере — обновляем список локально и перерисовываем
+            this.currentData = this.currentData.filter(item => item.id !== id);
+            this.applyPagination();
+            this.renderCards(this.paginatedData);
+        }, (error) => {
+            console.error('Ошибка при удалении:', error);
+            alert('Не удалось удалить карточку');
+    });
+}
     
 
     renderData(items) {
@@ -199,7 +223,7 @@ export class MainPage {
         const myInner = document.getElementById('my-inner');
         myInner.innerHTML = ''; 
         items.forEach(item => {
-          new ProductCardComponent(myInner).render(item, this.clickCard.bind(this));
+          new ProductCardComponent(myInner).render(item, this.clickCard.bind(this), this.deleteCard.bind(this), this.clickEdit.bind(this));
         });
         if (myInner.firstElementChild) {
           myInner.firstElementChild.classList.add('active');
@@ -210,6 +234,8 @@ export class MainPage {
     render() {
 
         this.parent.innerHTML = this.getHTML();
+        new AddCardButtonComponent(document.getElementById('add-button-container')).render(this.clickAdd.bind(this));
+
         this.setupControls();       
         this.getData();
         this.bindStaticListeners();

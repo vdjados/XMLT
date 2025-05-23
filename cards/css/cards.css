@@ -30,11 +30,12 @@
   /* ====================
      Card styles
      ==================== */
+     
   .card-custom {
     background-color: #fff !important;
     border: 0 !important;
     color: #ffffff !important;
-    width: 300px;
+    width: 350px;
     margin: 15px;
   }
   .card-custom .card-img-overlay {
@@ -58,16 +59,17 @@
     background-color: #ef3124 !important;
     color: #fff !important;
     border-radius: 8px;
+    border: 0;
+    border-color: #ef3124;
     padding: 8px 12px;
     display: block;
     width: fit-content;
     margin: 0 auto;
     font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica Neue, Helvetica, sans-serif;
-    font-size: 16px;
+    font-size: 14px;
   }
   .card-custom .btn-custom:hover {
-    background-color: #ffffff !important;
-    color: #000000 !important;
+    background-color: #e00000 !important;
   }
   
   /* ====================

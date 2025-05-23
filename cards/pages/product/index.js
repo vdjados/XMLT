@@ -75,9 +75,14 @@ export class ProductPage {
         const html = this.getHTML()
         this.parent.insertAdjacentHTML('beforeend', html)
 
-        const backButton = new BackButtonComponent(this.pageRoot)
+        this.getData()
+
+        const backButton = new BackButtonComponent(this.parent)
         backButton.render(this.clickBack.bind(this))
 
-        this.getData()
+        document.getElementById('home-link').addEventListener('click', (e) => {
+            e.preventDefault();
+            this.clickBack();
+        });
     }
 }

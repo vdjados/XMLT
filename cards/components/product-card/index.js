@@ -11,7 +11,11 @@ export class ProductCardComponent {
                 <div class="card-img-overlay" >
                     <h5 class="card-title">${data.creditTitle}</h5>
                     <p class="card-text">${data.creditText}</p>
-                    <button class="btn btn-custom" id="click-card-${data.id}" data-id="${data.id}">Подробнее</button>
+                    <div class="d-flex gap-2 justify-content-center">
+                        <button class="btn btn-custom" id="click-card-${data.id}" data-id="${data.id}">Подробнее</button>
+                        <button class="btn btn-custom" id="edit-card-${data.id}" data-id="${data.id}">Редактировать</button>
+                        <button class="btn btn-custom" id="delete-card-${data.id}" data-id="${data.id}">Удалить</button>
+                    </div>
                 </div>
             </div>
         `
@@ -25,15 +29,23 @@ export class ProductCardComponent {
         return result_html
     }
 
-    addListeners(data, listener) {
+    addListeners(data, onClick, onDelete, onEdit) {
         document
             .getElementById(`click-card-${data.id}`)
-            .addEventListener("click", listener)
+            .addEventListener("click", onClick)
+
+        document
+            .getElementById(`delete-card-${data.id}`)
+            .addEventListener("click", () => onDelete(data.id));
+
+        document
+            .getElementById(`edit-card-${data.id}`)
+            .addEventListener("click", () => onEdit(data.id));
     }
     
-    render(data,listener) {
-        const html = this.getHTML(data)
-        this.parent.insertAdjacentHTML('beforeend', html)
-        this.addListeners(data, listener)
-    }
+    render(data, onClick, onDelete, onEdit) {
+    const html = this.getHTML(data);
+    this.parent.insertAdjacentHTML('beforeend', html);
+    this.addListeners(data, onClick, onDelete, onEdit);
+}
 }

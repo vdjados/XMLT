@@ -15,11 +15,11 @@ class CreditUrls {
         return `${this.baseUrl}/credits`;
     }
 
-    removeCreditById() {
+    removeCreditById(id) {
         return `${this.baseUrl}/credits/${id}`;
     }
 
-    updateCreditById() {
+    updateCreditById(id) {
         return `${this.baseUrl}/credits/${id}`;
     }
 }
