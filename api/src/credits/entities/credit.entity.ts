@@ -3,4 +3,9 @@ export class Credit {
     src: string;
     creditTitle: string;
     creditText: string;
+    comments?: Array<{
+        id: number;
+        text: string;
+        date: string;
+    }>;
 }

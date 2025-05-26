@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsUrl, Length } from 'class-validator';
+import { IsString, IsNotEmpty, IsUrl, Length, IsOptional, IsArray } from 'class-validator';
 
 export class CreateCreditDto {
   @IsUrl({}, { message: 'src должно быть корректным URL' })
@@ -12,4 +12,12 @@ export class CreateCreditDto {
   @IsString()
   @IsNotEmpty({ message: 'creditText не может быть пустым' })
   creditText: string;
+
+  @IsOptional()
+  @IsArray()
+  comments?: Array<{
+    id: number;
+    text: string;
+    date: string;
+  }>;
 }
