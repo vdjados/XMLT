@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsUrl, Length, IsOptional, IsArray } from 'class-validator';
+import { IsString, IsNotEmpty, IsUrl, Length} from 'class-validator';
 
 export class CreateCreditDto {
   @IsUrl({}, { message: 'src должно быть корректным URL' })
