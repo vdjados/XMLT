@@ -13,11 +13,4 @@ export class CreateCreditDto {
   @IsNotEmpty({ message: 'creditText не может быть пустым' })
   creditText: string;
 
-  @IsOptional()
-  @IsArray()
-  comments?: Array<{
-    id: number;
-    text: string;
-    date: string;
-  }>;
 }
