@@ -72,6 +72,25 @@ class Ajax {
     }
 
     /**
+     * PUT запрос
+     * @param {string} url - Адрес запроса
+     * @param {object} data - Данные для обновления
+     * @param {function} callback - Функция обратного вызова (data, status)
+     */
+    put(url, data, callback) {
+        const xhr = new XMLHttpRequest();
+        xhr.open('PUT', url);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify(data));
+
+        xhr.onreadystatechange = () => {
+            if (xhr.readyState === 4) {
+                this._handleResponse(xhr, callback);
+            }
+        };
+    }
+
+    /**
      * Обработчик ответа (приватный метод)
      * @param {XMLHttpRequest} xhr - Объект запроса
      * @param {function} callback - Функция обратного вызова
