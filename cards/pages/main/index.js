@@ -89,14 +89,10 @@ export class MainPage {
 
                 <div class="justify-content-center">
                     <div class="col-auto">
-                        <div class="my-container" style="width: ">
+                        <div class="my-container">
                             <div id="my" class="my" data-bs-ride="my">
                                 <div class="my-inner" id="my-inner"></div>
                             </div>
-                        </div>
-                        <!-- Add/Delete Buttons -->
-                        <div class="d-flex justify-content-around mt-3">
-                            <div id="add-button-container"></div>
                         </div>
                     </div>
                 </div>
@@ -221,24 +217,31 @@ export class MainPage {
 
     renderCards(items) {
         const myInner = document.getElementById('my-inner');
-        myInner.innerHTML = ''; 
-        items.forEach(item => {
-          new ProductCardComponent(myInner).render(item, this.clickCard.bind(this), this.deleteCard.bind(this), this.clickEdit.bind(this));
+        myInner.innerHTML = '';
+
+        // Сначала рендерим карточки
+        items.forEach((item) => {
+            const productCard = new ProductCardComponent(myInner);
+            productCard.render(item, this.clickCard.bind(this), this.deleteCard.bind(this), this.clickEdit.bind(this));
         });
-        if (myInner.firstElementChild) {
-          myInner.firstElementChild.classList.add('active');
-        }
-      }
-    
+
+        // Затем рендерим кнопку добавления
+        const addCardButton = new AddCardButtonComponent(myInner);
+        addCardButton.render(this.clickAdd.bind(this));
+    }
 
     render() {
+        this.parent.innerHTML = '';
+        const html = this.getHTML();
+        this.parent.insertAdjacentHTML('beforeend', html);
 
-        this.parent.innerHTML = this.getHTML();
-        new AddCardButtonComponent(document.getElementById('add-button-container')).render(this.clickAdd.bind(this));
+        // Удаляем ненужный контейнер для кнопки добавления
+        const addButtonContainer = document.getElementById('add-button-container');
+        if (addButtonContainer) {
+            addButtonContainer.remove();
+        }
 
-        this.setupControls();       
         this.getData();
-        this.bindStaticListeners();
-
+        this.setupControls();
     }
 }

@@ -37,6 +37,10 @@
     color: #ffffff !important;
     width: 350px;
     margin: 15px;
+    transition: transform 0.2s ease-in-out;
+  }
+  .card-custom:hover {
+    transform: translateY(-5px);
   }
   .card-custom .card-img-overlay {
     padding: 30px;
@@ -73,6 +77,32 @@
   }
   
   /* ====================
+     Add Card Custom styles
+     ==================== */
+  .add-card-custom {
+    cursor: pointer;
+    position: relative;
+    background: rgba(239, 49, 36, 0.05) !important;
+    border: 2px dashed #ef3124 !important;
+  }
+  .add-card-custom:hover {
+    background: rgba(239, 49, 36, 0.1) !important;
+  }
+  .add-card-custom .card-img {
+    opacity: 0.1;
+  }
+  .add-card-custom .add-card-icon {
+    font-size: 48px;
+    color: #ef3124;
+    margin-bottom: 10px;
+  }
+  .add-card-custom .card-title {
+    color: #ef3124;
+    font-size: 20px;
+    margin-top: 10px;
+  }
+  
+  /* ====================
      Add/Delete button styles
      ==================== */
   .add-card-button,
@@ -95,9 +125,10 @@
   .my-inner {
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: flex-start;
     margin: 0 auto;
     gap: 15px;
+    padding: 15px;
   }
   .my-item {
     flex: 0 0 calc(33.333% - 30px);
