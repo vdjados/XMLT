@@ -244,10 +244,6 @@ export class MainPage {
         }
 
         this.getData();
-<<<<<<< HEAD
         this.setupControls();
-=======
-
->>>>>>> 6617543 (Finished lab6)
     }
 }
